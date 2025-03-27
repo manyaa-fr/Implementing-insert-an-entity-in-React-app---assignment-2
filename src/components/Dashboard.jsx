@@ -1,14 +1,13 @@
-// src/components/Dashboard.jsx
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MovieCard from './MovieCard';
-import { useNavigate } from 'react-router-dom';
-import './Dashboard.css'; // Optional: Import CSS for styling
+import { useNavigate, useLocation } from 'react-router-dom';
+import './Dashboard.css';
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // Sample movie data. In a real application, this might come from an API or global state.
+  // Initial movie data
   const [movies, setMovies] = useState([
     {
       id: 1,
@@ -17,7 +16,7 @@ const Dashboard = () => {
       genre: 'Science Fiction',
       releaseYear: 2010,
       synopsis: 'A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.',
-      posterUrl: 'https://image.tmdb.org/t/p/original/xymM5aW6MDcH5AR9I3CamSegJd6.jpgg',
+      posterUrl: 'https://image.tmdb.org/t/p/original/xymM5aW6MDcH5AR9I3CamSegJd6.jpg',
     },
     {
       id: 2,
@@ -28,7 +27,6 @@ const Dashboard = () => {
       synopsis: 'A computer hacker learns about the true nature of his reality and his role in the war against its controllers.',
       posterUrl: 'https://image.tmdb.org/t/p/original/dXNAPwY7VrqMAo51EKhhCJfaGb5.jpg',
     },
-    // Add more movie objects as needed
   ]);
 
   return (
@@ -41,6 +39,9 @@ const Dashboard = () => {
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
+      <button onClick={() => navigate('/add-movie')} className="add-movie-button">
+        Add Movie
+      </button>
     </div>
   );
 };
